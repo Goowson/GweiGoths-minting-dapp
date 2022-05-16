@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "ProxyRegistry",
-  "sourceName": "contracts/BoredApe.sol",
+  "sourceName": "contracts/GweiGoths.sol",
   "abi": [
     {
       "inputs": [
