@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 // @author codingwithdidem
 // @contact codingwithdidem@gmail.com
 
-contract BoredApe is 
+contract GwieGoth is 
     ERC721, 
     Ownable, 
     ReentrancyGuard, 
@@ -25,10 +25,10 @@ contract BoredApe is
     
     address proxyRegistryAddress;
 
-    uint256 public maxSupply = 100;
+    uint256 public maxSupply = 5000;
 
     string public baseURI; 
-    string public notRevealedUri = "ipfs://QmYUuwLoiRb8woXwJCCsr1gvbr8E21KuxRtmVBmnH1tZz7/hidden.json";
+    string public notRevealedUri = "NEW IPFS ADDRESS";
     string public baseExtension = ".json";
 
     bool public paused = false;
@@ -43,15 +43,14 @@ contract BoredApe is
 
     Counters.Counter private _tokenIds;
 
-    uint256[] private _teamShares = [25, 35, 40]; // 3 PEOPLE IN THE TEAM
+    uint256[] private _teamShares = [40, 60]; // 3 PEOPLE IN THE TEAM
     address[] private _team = [
-        0x933572D5F83B00A998102b7bf1a99c0f197E685B, // Admin Account gets 25% of the total revenue
-        0x82de9CE4a49fFeC4C41Cf733126F618eD83a879C, // Test Account gets 35% of the total revenue
-        0x8a7aC9834e2D4487Da22Dc130C97Ee8fBDc85568 // VIP Account gets 40% of the total revenue
+        0xc24eC12f4C78747952B90Cd50571AC23F18857fa, // Team allocation gets 40% of the total revenue
+        "UPDATE TO TREASURY WALLET", // DAO treasury gets 60% of the total revenue
     ];
 
     constructor(string memory uri, bytes32 merkleroot, address _proxyRegistryAddress)
-        ERC721("BoredApe", "APE")
+        ERC721("GweiGoth", "GWG")
         PaymentSplitter(_team, _teamShares) // Split the payment based on the teamshares percentages
         ReentrancyGuard() // A modifier that can prevent reentrancy during certain functions
     {
@@ -113,24 +112,24 @@ contract BoredApe is
     isValidMerkleProof(_proof)
     onlyAccounts
     {
-        require(msg.sender == account,          "CryptoPunks: Not allowed");
-        require(presaleM,                       "CryptoPunks: Presale is OFF");
-        require(!paused,                        "CryptoPunks: Contract is paused");
+        require(msg.sender == account,          "GweiGoths: Not allowed");
+        require(presaleM,                       "GweiGoths: Presale is OFF");
+        require(!paused,                        "GweiGoths: Contract is paused");
         require(
-            _amount <= presaleAmountLimit,      "CryptoPunks: You can't mint so much tokens");
+            _amount <= presaleAmountLimit,      "GweiGoths: You can't mint so many Goths my Goth");
         require(
-            _presaleClaimed[msg.sender] + _amount <= presaleAmountLimit,  "CryptoPunks: You can't mint so much tokens");
+            _presaleClaimed[msg.sender] + _amount <= presaleAmountLimit,  "GweiGoths: You can't mint so many Goths my Goth");
 
 
         uint current = _tokenIds.current();
 
         require(
             current + _amount <= maxSupply,
-            "CryptoPunks: max supply exceeded"
+            "GweiGoths: max supply exceeded"
         );
         require(
             _price * _amount <= msg.value,
-            "CryptoPunks: Not enough ethers sent"
+            "GweiGoths: Not enough funds my Goth"
         );
              
         _presaleClaimed[msg.sender] += _amount;
@@ -145,19 +144,19 @@ contract BoredApe is
     payable
     onlyAccounts
     {
-        require(publicM,                        "CryptoPunks: PublicSale is OFF");
-        require(!paused, "CryptoPunks: Contract is paused");
-        require(_amount > 0, "CryptoPunks: zero amount");
+        require(publicM,                        "GweiGoths: PublicSale is OFF");
+        require(!paused, "GweiGoths: Contract is paused");
+        require(_amount > 0, "GweiGoths: zero amount");
 
         uint current = _tokenIds.current();
 
         require(
             current + _amount <= maxSupply,
-            "CryptoPunks: Max supply exceeded"
+            "GweiGoths: Max supply exceeded"
         );
         require(
             _price * _amount <= msg.value,
-            "CryptoPunks: Not enough ethers sent"
+            "GweiGoths: Not enough funds my Goth"
         );
         
         
